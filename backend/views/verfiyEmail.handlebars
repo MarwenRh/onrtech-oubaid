@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test mail</title>
+    <style>
+      body { background-color: #f4f7fc; padding: 30px; font-family: 'Segoe UI',
+      Tahoma, Geneva, Verdana, sans-serif; } .container { max-width: 600px;
+      margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); } .header { background-color:
+      #0073e6; color: #fff; padding: 10px 20px; border-top-left-radius: 8px;
+      border-top-right-radius: 8px; } h2 { margin: 10px 0; } .text-danger {
+      color: #0e0337; } .footer { margin-top: 30px; text-align: center; }
+      .footer p { color: #6c757d; } .footer .text-danger { color: #6ac9f4; }
+      .btn { display: inline-block; text-decoration: none; color: #fff;
+      background-color: #0073e6; padding: 15px 30px; border-radius: 5px;
+      transition: background-color 0.3s; border: none; cursor: pointer;
+      font-size: 20px; font-weight: bold; } .btn:hover { background-color:
+      #0056b3; }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>ONRTECH</h2>
+      </div>
+      <h2>Hello <span class="text-danger">{{name}}</span></h2>
+      <p>Please use the url below to verify your account</p>
+      <p>This link is valid for 24hrs</p>
+
+      <a href={{link}} class="btn">Verify Account</a>
+
+      <div class="footer">
+        <p>Regards...</p>
+        <p><strong class="text-danger">ONRTECH</strong> Team</p>
+      </div>
+    </div>
+  </body>
+</html>
