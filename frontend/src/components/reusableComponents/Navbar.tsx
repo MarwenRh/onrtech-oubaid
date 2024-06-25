@@ -70,6 +70,8 @@ const Navbar = () => {
     { value: "Profile", path: "/profile" },
     { value: "My Articles", path: "/editorArticles" },
     { value: "My Job Offers", path: "/editorJobs" },
+    { value: "Clients", path: "/ourClients" },
+    { value: "Testimonials", path: "/ourTestimonials" },
   ];
   return (
     <div className="w-full pb-2 dark:bg-slate-900">

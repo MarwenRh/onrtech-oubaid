@@ -57,6 +57,8 @@ const MobileNavbar = ({ nav }: props) => {
     { value: "Profile", path: "/profile" },
     { value: "My Articles", path: "/editorArticles" },
     { value: "My Job Offers", path: "/editorJobs" },
+    { value: "Clients", path: "/ourClients" },
+    { value: "Testimonials", path: "/ourTestimonials" },
   ];
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,14 +72,6 @@ const MobileNavbar = ({ nav }: props) => {
     <div
       className={`${visibility} w-8/12 flex mx-auto flex-col font-medium p-4  mt-4 border border-gray-200 rounded-lg bg-blue-50   dark:bg-gray-800  dark:border-blue50 justify-center items-center  xl:hidden  `}
     >
-      {/* {linkValues.map((link, index) => (
-        <SingleNavLink
-          key={index}
-          value={link.value}
-          path={link.path}
-          style="leading-10 text-lg"
-        />
-      ))} */}
       <ShowOnLogout>
         {guestLinks.map((link, index) => (
           <SingleNavLink key={index} value={link.value} path={link.path} />

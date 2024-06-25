@@ -47,13 +47,9 @@ const Login = () => {
               toast.error("Login failed");
             }}
           />
-
-          <div className="m-2">
-            <h2>Or</h2>
-          </div>
         </div>
-        <div className="inline">
-          <Link to="/" className="inline text-blue-500">
+        <div className="inline text-center">
+          <Link to="/" className="inline hover:underline text-blue-500">
             Home
           </Link>
         </div>

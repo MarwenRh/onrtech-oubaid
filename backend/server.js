@@ -13,6 +13,7 @@ import JobsRouter from "./routes/JobRoute.js";
 import ArticlesRouter from "./routes/articleRoute.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import subscriptionRoutes from "./routes/subscriptionRoute.js";
+import clientRoutes from "./routes/clientRoute.js";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/api/articles", ArticlesRouter);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/forms", formRouter);
 app.use("/api/applications", applicationRouter);
+app.use("/api/clients", clientRoutes);
 
 const PORT = process.env.PORT || 5000;
 // Error Handler

@@ -45,11 +45,6 @@ const userSchema = mongoose.Schema(
       required: true,
       default: "Onrtech Member",
     },
-    city: {
-      type: String,
-      required: true,
-      default: "Planet Earth",
-    },
   },
   {
     timestamps: true,

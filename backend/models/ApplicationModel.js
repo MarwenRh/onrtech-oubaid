@@ -4,7 +4,6 @@ const ApplicationModel = new mongoose.Schema(
     applicantId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-
       ref: "user",
     },
     offerId: {

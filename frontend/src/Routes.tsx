@@ -29,6 +29,8 @@ import EditorJobs from "./pages/webeditor/EditorJobs";
 import FormList from "./pages/admin/from/FormList";
 import Applications from "./pages/admin/applications/Applications";
 import ProfilePage from "./pages/profile/Profile";
+import Clients from "./pages/webeditor/Clients";
+import TestimonialsEdit from "./pages/webeditor/Testimonials";
 
 const router = createBrowserRouter([
   {
@@ -130,6 +132,14 @@ const router = createBrowserRouter([
       {
         path: "/editorJobs",
         element: <EditorJobs />,
+      },
+      {
+        path: "/ourClients",
+        element: <Clients />,
+      },
+      {
+        path: "/ourTestimonials",
+        element: <TestimonialsEdit />,
       },
       {
         path: "/forms",

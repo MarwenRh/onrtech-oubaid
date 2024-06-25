@@ -4,7 +4,7 @@ const ArticleSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      // ref: "uesr",
+
       ref: "user",
     },
     title: {
@@ -30,11 +30,6 @@ const ArticleSchema = new mongoose.Schema(
     },
     publishedAt: {
       type: Date,
-    },
-    test: {
-      required: true,
-      type: String,
-      default: "test",
     },
   },
   {

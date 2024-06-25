@@ -112,14 +112,6 @@ const ArticleForm = () => {
             border-blue-300 dark:bg-slate-800 dark:text-gray-100"
             />
 
-            {/* <div>
-              <label>Content:</label>
-              <ReactQuill value={content} onChange={setContent} />
-            </div> */}
-            {/* <ReactQuill
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            /> */}
             <div>
               <div className="flex items-center space-x-2">
                 <label htmlFor="file-upload" className="cursor-pointer">

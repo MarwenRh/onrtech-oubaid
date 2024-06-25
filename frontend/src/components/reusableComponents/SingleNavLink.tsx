@@ -11,9 +11,7 @@ const SingleNavLink = ({ value, path, style }: props) => {
       to={path}
       className={({ isActive }) =>
         `text-base font-bold hover:text-blue-400 mx-4 my-1.5 dark:text-white dark:hover:text-blue-400  ${style} ${
-          isActive
-            ? "text-[17px]  transition-all duration-300"
-            : " text-gray-500"
+          isActive ? "transition-all duration-300" : " text-gray-400"
         } `
       }
     >

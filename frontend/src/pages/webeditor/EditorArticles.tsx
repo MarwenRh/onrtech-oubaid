@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 import useRedirectOnlyEditors from "../../hooks/useRedirectOnlyEditors";
 import useRedirectLoggedOutUser from "../../hooks/userRedirectLoggedOutUser";
+import { RootState } from "../../redux/store";
 
 const EditorArticles = () => {
   useRedirectLoggedOutUser("/login");

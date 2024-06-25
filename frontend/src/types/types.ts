@@ -86,3 +86,7 @@ export type link = {
   value: string;
   path: string;
 };
+export type client = {
+  companyLogo: string;
+  joinDate: string;
+};
