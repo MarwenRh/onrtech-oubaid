@@ -1,27 +1,14 @@
 import axios from "axios";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { CgSandClock } from "react-icons/cg";
 import { toast } from "react-toastify";
-import { client } from "../../types/types";
 
 const Clients = () => {
   const [joinDate, setJoinDate] = useState<string>("");
+  const [clientName, setClientName] = useState();
   const [disable, setDisable] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [imageName, setImageName] = useState("");
-  const [clients, setClients] = useState<client[]>([]);
-  useEffect(() => {
-    const getClients = async () => {
-      try {
-        const resp = await axios.get("http://localhost:5000/api/clients");
-        setClients(resp.data.Clients);
-        console.log("clients", resp.data.Clients);
-      } catch (error) {
-        toast.error("We had a server problem");
-      }
-    };
-    getClients();
-  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setJoinDate(event.target.value);
@@ -70,17 +57,7 @@ const Clients = () => {
 
   return (
     <div className="dark:bg-blue-950">
-      <div className="flex flex-row flex-wrap justify-evenly items-center">
-        {clients?.map((client, index) => (
-          <div key={index}>
-            <img
-              src={client.companyLogo}
-              className="rounded-full w-8 h-8 shadow-md shadow-blue-100"
-              alt="client"
-            />
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-row flex-wrap justify-evenly items-center"></div>
       {/* list of clients */}
       <div className="p-4 w-full"></div>
       <div className="dark:bg-blue-950 p-4 rounded-md w-10/12 mx-auto">
@@ -100,6 +77,22 @@ const Clients = () => {
               id="file-upload"
               type="file"
               onChange={handleImageChange}
+              className="hidden"
+            />
+            <div className="pt-3 text-gray-500 text-lg">{imageName}</div>
+          </div>
+          {/* client name */}
+          <div className="pt-4">
+            <label
+              htmlFor="client-name"
+              className="text-white bg-sky-500 rounded-md hover:bg-sky-700 px-2 py-2 hover:cursor-pointer"
+            >
+              Enter Client Name
+            </label>
+            <input
+              name="client-name"
+              type="text"
+              onChange={setClientName(e.target.value)}
               className="hidden"
             />
             <div className="pt-3 text-gray-500 text-lg">{imageName}</div>

@@ -36,7 +36,8 @@
     "react-spring": "^9.7.3",
     "react-text-rotator": "^1.2.0",
     "react-toastify": "^10.0.5",
-    "react-typed": "^2.0.12"
+    "react-typed": "^2.0.12",
+    "swiper": "^11.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
