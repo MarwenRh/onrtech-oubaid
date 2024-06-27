@@ -28,6 +28,8 @@ export const createClient = async (req, res) => {
     // Create a new client object
     const newClient = new Client({
       companyLogo: result.secure_url,
+      clientName: req.body.clientName,
+      description: req.body.description,
       joinDate: req.body.joinDate,
     });
     // Save the new client to the database

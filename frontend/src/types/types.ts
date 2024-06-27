@@ -88,7 +88,7 @@ export type link = {
 };
 export type client = {
   clientName: string;
-  clientLogo: string;
+  companyLogo: string;
   description: string;
-  joiningDate: string;
+  joinDate: string;
 };

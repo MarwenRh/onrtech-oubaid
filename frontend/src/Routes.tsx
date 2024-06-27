@@ -29,7 +29,7 @@ import EditorJobs from "./pages/webeditor/EditorJobs";
 import FormList from "./pages/admin/from/FormList";
 import Applications from "./pages/admin/applications/Applications";
 import ProfilePage from "./pages/profile/Profile";
-import Clients from "./pages/webeditor/Clients";
+import Clients from "./pages/webeditor/CreateClient";
 import TestimonialsEdit from "./pages/webeditor/Testimonials";
 
 const router = createBrowserRouter([

@@ -7,7 +7,7 @@ export const protect = asyncHandler(async (req, res, next) => {
     if (!token) {
       // test
       res.status(401);
-      // throw new Error("Not authorized please login");
+      throw new Error("Not authorized ");
     }
     // verify token
     const verfied = jwt.verify(token, process.env.JWT_SECRET);
@@ -20,7 +20,7 @@ export const protect = asyncHandler(async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    // throw new Error("Not authorized please login");
+    throw new Error("Not authorized ");
   }
 });
 // a middleware to protect admin routes
@@ -41,6 +41,6 @@ export const EditorAndAdmin = asyncHandler(async (req, res, next) => {
     next();
   } else {
     res.status(401);
-    // throw new Error("Not authorized as an web editor");
+    throw new Error("Not authorized ");
   }
 });

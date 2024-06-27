@@ -5,11 +5,19 @@ const clientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  clientName: {
+    type: String,
+    required: true,
+  },
   joinDate: {
     type: String,
     required: true,
   },
-  joined: {
+  description: {
+    type: String,
+    required: true,
+  },
+  created: {
     type: Date,
     default: Date.now(),
   },

@@ -8,7 +8,7 @@ import {
 } from "../controllers/clientController.js";
 const router = express.Router();
 const upload = multer({ dest: "uploads/" });
-router.get("/", protect, EditorAndAdmin, getClients);
+router.get("/", getClients);
 router.post(
   "/",
   protect,
