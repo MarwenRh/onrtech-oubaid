@@ -15,7 +15,7 @@ const ClientsList = () => {
         </h1>
       </div>
 
-      <ActiveSlider />
+      <ActiveSlider autoplayState={true} />
     </div>
   );
 };

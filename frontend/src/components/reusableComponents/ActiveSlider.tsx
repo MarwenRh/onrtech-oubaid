@@ -13,7 +13,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { client } from "../../types/types";
 
-const ActiveSlider = () => {
+const ActiveSlider = ({ autoplayState }) => {
   const [clients, setClients] = useState<client[]>();
   useEffect(() => {
     const getClients = async () => {
@@ -52,7 +52,7 @@ const ActiveSlider = () => {
           clickable: true,
         }}
         navigation={true}
-        autoplay={{ delay: 2500 }}
+        autoplay={autoplayState ? { delay: 1500 } : false}
         modules={[FreeMode, Pagination, Navigation, Autoplay]}
         className="w-full md:w-10/12 h-full p-8 flex flex-col justify-between items-center "
       >
