@@ -85,8 +85,7 @@ const Profile = () => {
             </h2>
             <div className="flex justify-center items-center">
               {/* Profile component */}
-              {/* Profile Component */}
-              <div className="bg-white shadow-lg rounded-lg w-[450px] mx-auto my-8 md:w-[550px]">
+              <div className="bg-white shadow-lg rounded-lg w-[450px] mx-auto my-8 md:w-[550px] dark:bg-slate-800 dark:shadow-gray-700">
                 <div className="relative p-6 pb-12">
                   <div className="flex flex-col items-center">
                     <div className="mb-4 relative">
@@ -96,10 +95,10 @@ const Profile = () => {
                         alt="Profile"
                       />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-800 mt-2">
+                    <h3 className="text-lg font-semibold text-gray-800 mt-2 dark:text-gray-200">
                       Role: {profile?.role}
                     </h3>
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                       Job Title: {profile?.jobTitle}
                     </h3>
                   </div>
@@ -107,13 +106,13 @@ const Profile = () => {
                 <form className="px-6 pb-6" onSubmit={saveProfile}>
                   <div className="mb-4">
                     <label
-                      className="block text-sm font-medium text-gray-600"
+                      className="block text-sm font-medium text-gray-600 dark:text-gray-400"
                       htmlFor="name"
                     >
                       Name
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="name"
                       type="text"
                       value={profile?.name}
@@ -122,13 +121,13 @@ const Profile = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block text-sm font-medium text-gray-600"
+                      className="block text-sm font-medium text-gray-600 dark:text-gray-400"
                       htmlFor="jobTitle"
                     >
                       Job Title
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="jobTitle"
                       type="text"
                       value={profile?.jobTitle}
@@ -137,13 +136,13 @@ const Profile = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block text-sm font-medium text-gray-600"
+                      className="block text-sm font-medium text-gray-600 dark:text-gray-400"
                       htmlFor="email"
                     >
                       Email
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 bg-gray-100 rounded-md p-2 border border-gray-300 cursor-not-allowed"
+                      className="block w-full text-sm text-gray-900 bg-gray-100 rounded-md p-2 border border-gray-300 cursor-not-allowed dark:bg-gray-600 dark:border-gray-500 dark:text-gray-400"
                       name="email"
                       type="email"
                       value={profile?.email}
@@ -153,13 +152,13 @@ const Profile = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block text-sm font-medium text-gray-600"
+                      className="block text-sm font-medium text-gray-600 dark:text-gray-400"
                       htmlFor="phone"
                     >
                       Phone
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="phone"
                       type="text"
                       value={profile?.phone}
@@ -168,13 +167,13 @@ const Profile = () => {
                   </div>
                   <div className="mb-4">
                     <label
-                      className="block text-sm font-medium text-gray-600"
+                      className="block text-sm font-medium text-gray-600 dark:text-gray-400"
                       htmlFor="bio"
                     >
                       Bio
                     </label>
                     <textarea
-                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       cols={30}
                       rows={4}
                       name="bio"

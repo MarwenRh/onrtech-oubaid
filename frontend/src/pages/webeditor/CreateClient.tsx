@@ -9,7 +9,6 @@ const CreateClient = () => {
   const [disable, setDisable] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
-  const [imageName, setImageName] = useState("");
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -20,7 +19,6 @@ const CreateClient = () => {
         return;
       }
       setImage(file);
-      setImageName(file.name);
     }
   };
 
@@ -65,22 +63,18 @@ const CreateClient = () => {
   };
 
   return (
-    <div className="dark:bg-blue-950 p-4 rounded-md w-10/12 mx-auto">
-      <h1 className="text-center font-bold text-3xl">Add Client</h1>
+    <div className="dark:bg-slate-900 p-4  mx-auto">
+      <h1 className="text-center font-bold text-3xl dark:text-white">
+        Add Client
+      </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-between bg-white shadow-lg shadow-gray-300 p-4 text-center items-center"
+        className="flex flex-col justify-between bg-white shadow-lg shadow-gray-300 p-4 text-center items-center w-11/12 mx-auto dark:bg-slate-800 dark:shadow-gray-700"
       >
         <div className="pt-4">
-          {/* 
-
-
-*/}
-
-          {/*  */}
           <label
             htmlFor="file-upload"
-            className="text-white bg-sky-500 rounded-md hover:bg-sky-700 px-2 py-2 hover:cursor-pointer"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200"
           >
             Upload Client Logo
           </label>
@@ -88,15 +82,14 @@ const CreateClient = () => {
             id="file-upload"
             type="file"
             onChange={handleImageChange}
-            className="hidden"
+            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
           />
-          <div className="pt-3 text-gray-500 text-lg">{imageName}</div>
         </div>
 
-        <div className="pt-4">
+        <div className="pt-4 w-7/12">
           <label
             htmlFor="client-name"
-            className="text-gray-700 font-semibold text-lg"
+            className="text-gray-700 font-semibold text-lg dark:text-gray-200"
           >
             Enter Client Name
           </label>
@@ -105,25 +98,24 @@ const CreateClient = () => {
             type="text"
             value={clientName}
             onChange={handleClientNameChange}
-            className="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300"
+            className="block w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
         </div>
 
-        <div className="pt-4">
+        <div className="pt-4 w-7/12">
           <label
             htmlFor="description"
-            className="text-gray-700 font-semibold text-lg"
+            className="text-gray-700 font-semibold text-lg dark:text-gray-200"
           >
             Description
           </label>
           <textarea
             id="description"
-            cols={25}
-            rows={20}
+            rows={10}
             value={description}
             onChange={handleDescriptionChange}
-            className="block mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300"
+            className="block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
         </div>
@@ -131,12 +123,12 @@ const CreateClient = () => {
         <div className="pt-8">
           <label
             htmlFor="joinDate"
-            className="px-1 text-gray-700 font-semibold text-lg"
+            className="px-1 text-gray-700 font-semibold text-lg dark:text-gray-200"
           >
             Client Since:
           </label>
           <input
-            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300"
+            className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             id="joinDate"
             type="date"
             value={joinDate}
@@ -149,7 +141,7 @@ const CreateClient = () => {
         <div className="mt-4">
           <button
             type="submit"
-            className="w-full px-6 py-2 text-lg text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+            className="w-full px-6 py-2 text-lg text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-blue"
           >
             {disable ? (
               <CgSandClock size={30} className="text-gray-300" />
