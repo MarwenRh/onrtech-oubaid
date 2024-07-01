@@ -4,7 +4,7 @@ import it from "../../../assets/MicrosoftTeams-image-1-1024x683.jpg";
 const Hero = () => {
   const { t } = useTranslation();
   return (
-    <div className="pt-14 ">
+    <div className="pt-4 ">
       <div className="bg-gray-50 w-full h-[530px] lg:h-72 flex flex-col lg:flex-row-reverse items-center justify-between dark:bg-slate-900">
         <img
           src={it}

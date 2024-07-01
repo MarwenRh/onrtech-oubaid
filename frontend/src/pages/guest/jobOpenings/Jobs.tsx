@@ -62,7 +62,7 @@ const Jobs = () => {
         <Loader />
       ) : (
         <div className="">
-          <div className="pt-10 pb-20 ">
+          <div className="pt-4 pb-4 ">
             <div className="mx-auto w-10/12 bg-gray-100 rounded-lg lg:h-52 h-96 t-2 flex flex-col justify-center dark:bg-slate-600">
               <div className="w-10/12 lg:h-2/5 h-full m-8 mx-auto bg-white shadow-lg shadow-gray-500 rounded-xl flex lg:flex-row items-center justify-evenly flex-col p-2 dark:bg-gray-300 ">
                 <div className="flex l justify-evenly items-center flex-row p-2">

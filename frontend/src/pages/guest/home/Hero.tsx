@@ -8,7 +8,7 @@ const Hero = () => {
 
   return (
     <div className="dark:bg-slate-900  bg-white">
-      <div className="max-w-[800px] w-full mx-auto text-center flex flex-col pt-10">
+      <div className="max-w-[800px] w-full mx-auto text-center flex flex-col pt-4">
         <h1 className="text-sky-300 text-4xl font-bold dark:text-blue-500">
           {t("Bring_Your_Business_Online")}
         </h1>

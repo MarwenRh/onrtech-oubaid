@@ -10,7 +10,7 @@ type Prop = {
 const SingleArticleCard = ({ article, style }: Prop) => {
   return (
     <div
-      className={` dark:bg-slate-500 h-[730px] w-[365px]  md:h-[570px] md:w-[365px] m-5 bg-white shadow-md rounded-lg ${style} relative`}
+      className={` dark:bg-slate-500 h-[650px] w-[365px]  md:h-[570px] md:w-[365px] m-5 bg-white shadow-md rounded-lg ${style} relative`}
     >
       <img
         src={article.image}
@@ -35,14 +35,14 @@ const SingleArticleCard = ({ article, style }: Prop) => {
 
         {/* {article.content.length > maxContentLength && ( */}
         <div className="mt-4">
-          <p className="text-gray-500 font-semibold dark:text-blue-800 absolute top-[650px] md:top-[500px]">
+          <p className="text-gray-500 font-semibold dark:text-blue-800 absolute top-[540px] md:top-[500px]">
             Published on {formatDate(article.publishedAt)}
           </p>
         </div>
         {/* // )} */}
         <Link
           to={`/singleArticleForGeust/${article._id}`}
-          className=" dark:text-green-400 font-bold text-teal-700 hover:underline absolute top-[680px] md:top-[530px]"
+          className=" dark:text-green-400 font-bold text-teal-700 hover:underline absolute top-[600px] md:top-[530px]"
         >
           Read More
         </Link>

@@ -51,7 +51,7 @@ const ArticlesList = () => {
   };
 
   return (
-    <div className="relative pt-10">
+    <div className="relative pt-4">
       <div className="py-2 mx-auto text-center w-8/12 ">
         <p className="text-gray-600 text-2xl dark:text-white">
           {t("welcomeMessage")}
@@ -78,8 +78,8 @@ const ArticlesList = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div className="p-10">
-            <div className="h-full w-full mx-auto flex flex-wrap flex-row justify-evenly items-center mt-10">
+          <div className="">
+            <div className="h-full w-full mx-auto flex flex-wrap flex-row justify-evenly items-center mt-10 bg-green-300">
               {currentItems.map((item, index) => (
                 <SingleArticleCard
                   key={index}

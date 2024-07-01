@@ -34,7 +34,7 @@ const WelcomeSection = () => {
           </p>
         </div>
       </div>
-      <div className="mx-auto w-10/12 flex flex-wrap justify-center">
+      <div className="mx-auto w-full flex flex-wrap justify-center">
         {articles.map((article, index) => (
           <SingleArticleCard
             key={index}

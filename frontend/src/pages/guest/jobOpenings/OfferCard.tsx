@@ -11,7 +11,7 @@ type Props = {
 
 const OfferCard = ({ offer }: Props) => {
   return (
-    <div className="bg-gray-50 m-4 rounded-lg shadow-lg p-6  hover:bg-gray-100 hover:shadow-blue-300 dark:bg-gray-200 border-gray-200 border w-[400px] h-[530px] relative sm:w-80 sm:h-[370px] md:w-96 md:h-[390px] ">
+    <div className="bg-gray-50 m-4 rounded-lg shadow-lg p-6  hover:bg-gray-100 hover:shadow-blue-300 dark:bg-gray-200 border-gray-200 border w-[400px] h-[500px] relative sm:w-80 sm:h-[370px] md:w-96 md:h-[390px] ">
       <div className="flex justify-between items-center mb-2">
         <div>
           <div>
@@ -41,7 +41,7 @@ const OfferCard = ({ offer }: Props) => {
       {/* apply button */}
 
       <div className="mt-4 mx-auto text-center">
-        <div className="absolute  w-11/12 right-4 top-[470px]  md:top-[330px]">
+        <div className="absolute  w-11/12 right-4 top-[440px]  md:top-[330px]">
           <button className="bg-white hover:bg-blue-500 hover:text-white w-2/3 text-gray-800 px-4 py-2 rounded-md border border-gray-300 shadow-lg shadow-gray-400 hover:shadow-lg hover:-translate-y-1">
             <Link to={`/offerApplication/${offer._id}`}>Apply Now</Link>
           </button>

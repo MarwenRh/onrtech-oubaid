@@ -5,7 +5,7 @@ type Props = {
 };
 const JobsList = ({ jobs }: Props) => {
   return (
-    <div className="p-10">
+    <div className="p-2">
       <div className="w-full md:w-10/12 mx-auto flex flex-wrap flex-row justify-evenly items-center">
         {jobs.map((job, index) => {
           return <OfferCard key={index} offer={job} />;
