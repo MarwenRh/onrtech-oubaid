@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { JobOffer } from "../../../types/types";
 import { Loader } from "../../../components/loader/Loader";
-import { formatDate } from "../../../utils/fomatDate";
-import { useSelector } from "react-redux";
 
 import { toast } from "react-toastify";
 import { CgSandClock } from "react-icons/cg";
 import { RootState } from "../../../redux/store";
+import { useSelector } from "react-redux";
 
 const ApplyForm = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -18,12 +17,6 @@ const ApplyForm = () => {
   const [disable, setDiable] = useState(false);
 
   const { id } = useParams();
-
-  // Assume we have user info from context or props
-  // const user = {
-  //   name: "John Doe", // Replace with actual user name
-  //   email: "john.doe@example.com", // Replace with actual user email
-  // };
 
   useEffect(() => {
     const getSingleJob = async (id: string) => {
@@ -42,13 +35,13 @@ const ApplyForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const selectedFile = e.target.files[0];
+      const inputedFile = e.target.files[0];
       // Check if the file is a PDF
-      if (selectedFile.type !== "application/pdf") {
+      if (inputedFile.type !== "application/pdf") {
         toast.error("Please upload a PDF file.");
         return;
       }
-      setFile(selectedFile);
+      setFile(inputedFile);
     }
   };
 
@@ -101,137 +94,232 @@ const ApplyForm = () => {
         <Loader />
       ) : (
         <div className="p-2 w-10/12 ">
-          <div>
-            <h2 className="pt-6  text-3xl font-extrabold text-gray-900 dark:text-blue-50">
-              {job?.title}
-            </h2>
-            <h2 className="pt-3 text-2xl text-blue-400 font-semibold">
-              Onrtech
-            </h2>
-          </div>
-          <div className="pt-2">
-            <h2 className="font-semibold text-xl dark:text-blue-100 ">
-              Location
-            </h2>
-            <div className=" flex-col flex md:flex-row text-lg ">
-              <div className="flex flex-row justify-evenly  items-center pr-8">
-                <h2 className="pr-3 font-medium text-sky-500 ">
-                  Location Type :{" "}
-                </h2>
-                <p>{job?.locationType}</p>
+          <div className="dark:bg-slate-900 pt-10">
+            <form className="p-6 bg-gray-200 rounded-lg shadow-md w-10/12 mx-auto dark:bg-slate-400">
+              <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+                Edit the current job offer
+              </h2>
+              <div>
+                <label
+                  htmlFor="title"
+                  className="block mb-2 dark:text-gray-100 text-lg"
+                >
+                  Title
+                </label>
+                <input
+                  readOnly
+                  className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                  value={job?.title}
+                />
               </div>
-              <div className="flex flex-row justify-evenly items-center pr-8 ">
-                <h2 className="pr-3 font-medium  text-sky-500">
-                  Location Place :{" "}
-                </h2>
-                <div>{job?.locationPlace}</div>
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <p className="font-semibold text-xl dark:text-blue-100  ">
-              Published at :
-            </p>{" "}
-            {job && formatDate(job?.publishedAt)}
-          </div>
-          <div className="pt-2">
-            <h2 className="font-semibold text-xl dark:text-blue-100  ">
-              Contract
-            </h2>
-            <div className="flex-col flex md:flex-row text-lg ">
-              <div className="flex flex-row justify-evenly  items-center pr-8">
-                <h2 className="pr-3 font-medium text-sky-500">
-                  Contract Type :{" "}
-                </h2>
-                <p>{job?.contractType}</p>
-              </div>
-              <div className="flex flex-row justify-evenly items-center pr-8 ">
-                <h2 className="pr-3 font-medium  text-sky-500">
-                  Contract Duration :{" "}
-                </h2>
-                <div>{job?.contractDuration}</div>
-              </div>
-            </div>
-          </div>
-          {/* Income */}
-          <div className="pt-2">
-            <h2 className="font-semibold text-xl  dark:text-blue-100 ">
-              Income
-            </h2>
-            <div className="flex-col flex md:flex-row text-lg ">
-              <div className="flex flex-row justify-evenly  items-center pr-8">
-                <h2 className="pr-3 font-medium  text-sky-500">
-                  Income Period :{" "}
-                </h2>
-                <p>{job?.incomePeriod}</p>
-              </div>
-              <div className="flex flex-row justify-evenly items-center pr-8 ">
-                <h2 className="pr-3 font-medium text-sky-500">
-                  Income Value :{" "}
-                </h2>
-                <div>{job?.incomeValue}</div>
-              </div>
-              <div className="flex flex-row justify-evenly items-center pr-8 ">
-                <h2 className="pr-3 font-medium text-sky-500">
-                  Income Currency :{" "}
-                </h2>
-                <div>{job?.incomeCurrency}</div>
-              </div>
-            </div>
-          </div>
-          {/* Required  Qualification */}
-          <div className="pt-2">
-            <h2 className="font-semibold text-xl  dark:text-blue-100 ">
-              Essential Qualifications
-            </h2>
-            <div className="flex-col flex text-lg  ">
-              <div className="flex flex-col lg:flex-row justify-between  items-center p-4 ">
-                <div className="pr-8 w-full  lg:w-3/12 font-medium text-sky-500">
-                  Job Qualifcation :
+              <div className="flex flex-row justify-between">
+                <div className="w-3/5">
+                  <label
+                    htmlFor="targetProfile"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Target Profile
+                  </label>
+                  <input
+                    readOnly
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.targetProfile}
+                  />
                 </div>
-                <p>{job?.requiredQualification}</p>
-              </div>
-
-              <div className="flex flex-col lg:flex-row justify-start  items-center p-4">
-                <div className="pr-3  font-medium text-sky-500">
-                  Years of experience :
+                <div className="w-1/4">
+                  <label
+                    htmlFor="contractType"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Contract Type
+                  </label>
+                  <input
+                    readOnly
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.contractType}
+                  />
                 </div>
-                <div>{job?.yearsOfExperienceRequired}</div>
               </div>
-            </div>
-          </div>
-          {/*Optional qulifaction  */}
-          <div className="pt-2">
-            <h2 className="font-semibold text-xl  dark:text-blue-100 ">
-              Recommended Expertise
-            </h2>
-            <div className="flex-col flex text-lg  ">
-              <div className="flex flex-col lg:flex-row justify-between  items-center p-4 ">
-                <div className="pr-8 w-full  lg:w-3/12 font-medium text-sky-500">
-                  Advantageous Attributes :
+              <div className="flex-col flex sm:flex-row justify-evenly md:justify-between items-center">
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="contractDuration"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Contract Duration
+                  </label>
+                  <input
+                    readOnly
+                    id="contractDuration"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.contractDuration}
+                  />
                 </div>
-                <p>{job?.optionalQualification}</p>
-              </div>
-
-              <div className="flex flex-col lg:flex-row justify-start  items-center p-4">
-                <div className="pr-3  font-medium text-sky-500">
-                  Recommended Years of experience :
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="locationType"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Location Type
+                  </label>
+                  <input
+                    readOnly
+                    id="locationType"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.locationType}
+                  />
                 </div>
-                <div>{job?.yearsOfExperienceRecommanded}</div>
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="locationPlace"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Location Place
+                  </label>
+                  <input
+                    readOnly
+                    id="locationPlace"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.locationPlace}
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-          <div>
-            <h2 className="font-semibold text-xl  dark:text-blue-100 ">
-              Target Profile :
-            </h2>{" "}
-            <div className="text-lg">{job?.targetProfile}</div>
-          </div>
-          <div>
-            <h2 className="font-semibold text-xl  dark:text-blue-100 ">
-              Benefit :
-            </h2>{" "}
-            <div className="text-lg">{job?.benefits}</div>
+              <div className="flex-col flex sm:flex-row justify-evenly md:justify-between items-center ">
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="incomePeriod"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Income Period
+                  </label>
+                  <input
+                    readOnly
+                    id="incomePeriod"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.incomePeriod}
+                  />
+                </div>
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="incomeValue"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Income Value
+                  </label>
+                  <input
+                    readOnly
+                    type="number"
+                    id="incomeValue"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.incomeValue}
+                  />
+                </div>
+                <div className="lg:w-1/4">
+                  <label
+                    htmlFor="incomeValue"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Income Currency
+                  </label>
+                  <input
+                    readOnly
+                    type="text"
+                    id="incomeValue"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.incomeCurrency}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row justify-between">
+                <div className="w-2/5">
+                  <label
+                    htmlFor="requiredQualification"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Required Qualifications
+                  </label>
+                  <input
+                    readOnly
+                    id="requiredQualification"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.requiredQualification}
+                  />
+                </div>
+                <div className="w-2/5">
+                  <label
+                    htmlFor="optionalQualification"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Optional Qualifications
+                  </label>
+                  <input
+                    readOnly
+                    id="optionalQualification"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.optionalQualification}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row justify-between">
+                <div className="w-2/5">
+                  <label
+                    htmlFor="yearsOfExperienceRequired"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Years of Experience Required
+                  </label>
+                  <input
+                    readOnly
+                    type="number"
+                    id="yearsOfExperienceRequired"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.yearsOfExperienceRequired}
+                  />
+                </div>
+                <div className="w-2/5">
+                  <label
+                    htmlFor="yearsOfExperienceRecommanded"
+                    className="block mb-2 dark:text-gray-100 text-lg"
+                  >
+                    Years of Experience Recommended
+                  </label>
+                  <input
+                    readOnly
+                    type="number"
+                    id="yearsOfExperienceRecommanded"
+                    className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                    value={job?.yearsOfExperienceRecommanded}
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="benefits"
+                  className="block mb-2 dark:text-gray-100 text-lg"
+                >
+                  Benefits
+                </label>
+                <input
+                  readOnly
+                  id="benefits"
+                  className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                  value={job?.benefits}
+                />
+              </div>
+              <label
+                htmlFor="description"
+                className="block mb-2 dark:text-gray-100 text-lg"
+              >
+                Description
+              </label>
+              <textarea
+                readOnly
+                rows={12}
+                id="description"
+                className="w-full p-2 mb-4 border rounded dark:text-gray-700"
+                value={job?.description}
+              />
+            </form>
           </div>
 
           {user ? (
