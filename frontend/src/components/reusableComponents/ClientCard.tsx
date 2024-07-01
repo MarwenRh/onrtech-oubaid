@@ -46,7 +46,7 @@ const ClientCard = ({ client }: Prop) => {
         alt={client.clientName}
       />
 
-      <div className="p-8">
+      <div className="p-2">
         <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold dark:text-indigo-400">
           {client.clientName}
         </div>

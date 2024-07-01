@@ -33,7 +33,7 @@ const ActiveSlider = ({ autoplayState }: Props) => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex items-center justify-center flex-col  ">
+        <div className="flex items-center justify-center flex-col text-center">
           <Swiper
             breakpoints={{
               // when window width is >= 640px

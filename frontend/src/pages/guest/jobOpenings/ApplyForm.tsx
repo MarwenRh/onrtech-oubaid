@@ -90,15 +90,21 @@ const ApplyForm = () => {
   };
 
   return (
-    <div className="pt-6 flex items-center justify-center dark:bg-slate-900 dark:text-gray-100">
+    <div className="pt-2 flex items-center justify-center dark:bg-slate-900 dark:text-gray-100">
       {loading ? (
         <Loader />
       ) : (
         <div className="p-2 w-full md:w-10/12 ">
-          <div className="dark:bg-slate-900 pt-10">
-            <form className="p-6 bg-gray-200 rounded-lg shadow-md w-full md:w-10/12 mx-auto dark:bg-slate-400">
-              <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-                Edit the current job offer
+          <div className="dark:bg-slate-900 ">
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 bg-gray-200 rounded-lg shadow-md w-full md:w-10/12 mx-auto dark:bg-slate-400"
+            >
+              <h2 className="text-xl font-semibold mb-4 dark:text-white">
+                Valuable opportunity with{" "}
+                <span className="text-blue-500 font-semibold dark:text-blue-800">
+                  ONRTECH
+                </span>
               </h2>
               <div>
                 <label
@@ -320,58 +326,57 @@ const ApplyForm = () => {
                 className="w-full p-2 mb-4 border rounded dark:text-gray-700"
                 value={job?.description}
               />
+              {user ? (
+                user.role === "Admin" || user.role === "Web Editor" ? (
+                  <div>
+                    <div className="text-lg font-bold text-red-500">
+                      As an administrator, you cannot apply
+                    </div>
+                  </div>
+                ) : (
+                  <div onSubmit={handleSubmit} className="mt-8 space-y-6">
+                    <div>
+                      <label
+                        htmlFor="resume"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100"
+                      >
+                        Upload resume
+                      </label>
+                      <input
+                        type="file"
+                        id="resume"
+                        onChange={handleFileChange}
+                        required
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-600"
+                      />
+                    </div>
+                    <div>
+                      <button
+                        disabled={disable}
+                        type="submit"
+                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      >
+                        {disable ? (
+                          <CgSandClock size={30} className="text-gray-300" />
+                        ) : (
+                          "Apply"
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div>
+                  <div className="text-lg font-bold text-red-500">
+                    You have to register to apply
+                  </div>
+                  <div className="text-lg underline text-blue-500 decoration-blue-300">
+                    <Link to={"/login"}>Register Now</Link>
+                  </div>
+                </div>
+              )}
             </form>
           </div>
-
-          {user ? (
-            user.role === "Admin" || user.role === "Web Editor" ? (
-              <div>
-                <div className="text-lg font-bold text-red-500">
-                  As an administrator, you cannot apply
-                </div>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-                <div>
-                  <label
-                    htmlFor="resume"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-100"
-                  >
-                    Upload resume
-                  </label>
-                  <input
-                    type="file"
-                    id="resume"
-                    onChange={handleFileChange}
-                    required
-                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-600"
-                  />
-                </div>
-                <div>
-                  <button
-                    disabled={disable}
-                    type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    {disable ? (
-                      <CgSandClock size={30} className="text-gray-300" />
-                    ) : (
-                      "Apply"
-                    )}
-                  </button>
-                </div>
-              </form>
-            )
-          ) : (
-            <div>
-              <div className="text-lg font-bold text-red-500">
-                You have to register to apply
-              </div>
-              <div className="text-lg underline text-blue-500 decoration-blue-300">
-                <Link to={"/login"}>Register Now</Link>
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>
