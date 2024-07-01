@@ -52,7 +52,7 @@ export const deleteClientById = async (req, res) => {
       return res.status(200).send({ msg: "deleted succefully" });
     }
   } catch (error) {
-    console.log(msg.error);
+    console.log(error);
     return res.status(500).send({ msg: error.message });
   }
 };

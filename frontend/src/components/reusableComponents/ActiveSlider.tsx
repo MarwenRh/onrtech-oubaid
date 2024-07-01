@@ -12,8 +12,11 @@ import ClientCard from "./ClientCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { client } from "../../types/types";
+type Props = {
+  autoplayState: boolean;
+};
 
-const ActiveSlider = ({ autoplayState }) => {
+const ActiveSlider = ({ autoplayState }: Props) => {
   const [clients, setClients] = useState<client[]>();
   useEffect(() => {
     const getClients = async () => {
@@ -56,14 +59,9 @@ const ActiveSlider = ({ autoplayState }) => {
         modules={[FreeMode, Pagination, Navigation, Autoplay]}
         className="w-full md:w-10/12 h-full p-8 flex flex-col justify-between items-center "
       >
-        {clients?.map((client) => (
-          <SwiperSlide className="m-2" key={client.clientName}>
-            <ClientCard
-              clientName={client.clientName}
-              companyLogo={client.companyLogo}
-              description={client.description}
-              joinDate={client.joinDate}
-            />
+        {clients?.map((client, index) => (
+          <SwiperSlide className="m-2" key={index}>
+            <ClientCard client={client} />
           </SwiperSlide>
         ))}
       </Swiper>

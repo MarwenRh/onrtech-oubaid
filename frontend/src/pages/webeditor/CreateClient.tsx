@@ -9,6 +9,7 @@ const CreateClient = () => {
   const [disable, setDisable] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
+  const maxDescriptionLength = 100;
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -31,7 +32,9 @@ const CreateClient = () => {
   };
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value);
+    if (e.target.value.length <= maxDescriptionLength) {
+      setDescription(e.target.value);
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -63,7 +66,8 @@ const CreateClient = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 p-4  mx-auto">
+    <div className="dark:bg-slate-900 p-4 mx-auto">
+      {/* <ActiveSlider autoplayState={true} /> */}
       <h1 className="text-center font-bold text-3xl dark:text-white">
         Add Client
       </h1>
@@ -118,6 +122,9 @@ const CreateClient = () => {
             className="block mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200 focus:border-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
           />
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
+            {description.length}/{maxDescriptionLength} characters
+          </p>
         </div>
 
         <div className="pt-8">
@@ -142,6 +149,7 @@ const CreateClient = () => {
           <button
             type="submit"
             className="w-full px-6 py-2 text-lg text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue dark:focus:shadow-outline-blue"
+            disabled={disable}
           >
             {disable ? (
               <CgSandClock size={30} className="text-gray-300" />

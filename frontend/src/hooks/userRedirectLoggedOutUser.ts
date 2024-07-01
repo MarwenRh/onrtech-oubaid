@@ -16,7 +16,7 @@ const useRedirectLoggedOutUser = (path: string) => {
       }
 
       if (!isLoggedIn) {
-        toast.info(" please login to continue");
+        toast.info("please login to continue");
         navigate(path);
         return;
       }

@@ -160,52 +160,6 @@ export const deleteArticleById = async (req, res) => {
   }
 };
 
-// update an article
-
-// update an article
-// export const updateArticleById = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     let article = await Article.findById(id);
-//     if (!article) {
-//       return res.status(404).send({ msg: "Article not found" });
-//     }
-
-//     if (req.file) {
-//       if (!req.file.mimetype.startsWith("image/")) {
-//         // If no file is provided or if it's not an image, return an error response
-//         return res.status(400).json({ error: "Only images are allowed." });
-//       }
-
-//       // Delete the old image from Cloudinary
-//       const publicId = article.image.split("/").pop().split(".")[0];
-//       await cloudinary.uploader.destroy(publicId);
-
-//       // Upload the new image to Cloudinary
-//       const result = await cloudinary.uploader.upload(req.file.path);
-//       req.body.image = result.secure_url;
-
-//       // Update the article in the database
-//       const updatedArticle = await Article.findByIdAndUpdate(id, req.body, {
-//         new: true,
-//       });
-
-//       // Delete temporary file from server
-//       fs.unlinkSync(req.file.path);
-
-//       return res.status(200).send(updatedArticle);
-//     }
-//     // const result = await Article.findByIdAndUpdate(id, req.body, {
-//     //   new: true,
-//     // });
-//     // console.log(result);
-//     // res.status(200).send(result);
-//   } catch (error) {
-//     console.log(error.message);
-//     return res.status(500).send({ msg: error.message });
-//   }
-// };
-
 export const updateArticleById = async (req, res) => {
   try {
     const id = req.params.id;
