@@ -14,7 +14,7 @@ const router = express.Router();
 const storage = { dest: "uploads/" };
 const upload = multer({ dest: "uploads/" });
 
-router.post("/apply", protect, upload.single("cv"), applyForJob);
+router.post("/apply", protect, upload.single("resume"), applyForJob);
 router.get("/", protect, adminOnly, getApplications);
 router.delete("/:id", protect, adminOnly, deleteApplication);
 router.patch("/accept/:id", protect, adminOnly, acceptApplication);

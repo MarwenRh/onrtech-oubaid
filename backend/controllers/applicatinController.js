@@ -12,7 +12,7 @@ export const applyForJob = async (req, res) => {
     req.body;
 
   if (!req.file) {
-    return res.status(400).json({ message: "Please upload your CV." });
+    return res.status(400).json({ message: "Please upload your resume." });
   }
 
   if (req.file.mimetype !== "application/pdf") {
@@ -26,7 +26,7 @@ export const applyForJob = async (req, res) => {
 
     fs.unlinkSync(req.file.path);
 
-    const cvUrl = result.secure_url;
+    const resumeUrl = result.secure_url;
 
     // Create new application
     const newApplication = new Application({
@@ -34,7 +34,7 @@ export const applyForJob = async (req, res) => {
       offerId,
       applicantName,
       applicantEmail,
-      cv: cvUrl,
+      resume: resumeUrl,
       offerTitle,
       published: false,
     });

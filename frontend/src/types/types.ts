@@ -79,7 +79,7 @@ export type Application = {
   applicantName: string;
   applicantEmail: string;
   offerTitle: string;
-  cv: string;
+  resume: string;
   state: string;
 };
 export type link = {

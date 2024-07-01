@@ -6,10 +6,10 @@ import { Application } from "../../../types/types";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
 import { FaTrashCan } from "react-icons/fa6";
 import { confirmAlert } from "react-confirm-alert";
-import ReactPaginate, { ReactPaginateProps } from "react-paginate";
 import { BiCheckCircle } from "react-icons/bi";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
 import { MdCancel } from "react-icons/md";
+import ReactPaginate from "react-paginate";
 
 const Applications = () => {
   useRedirectLoggedOutUser("/login");
@@ -70,7 +70,7 @@ const Applications = () => {
   // end pagination
 
   // Invoke when user click to request another page.
-  const handlePageClick = (event: ReactPaginateProps["onPageChange"]) => {
+  const handlePageClick = (event: { selected: number }) => {
     const newOffset = (event.selected * itemsPerPage) % applications.length;
     setItemOffset(newOffset);
   };
@@ -148,7 +148,7 @@ const Applications = () => {
                     </td>
                     <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-300">
                       <a
-                        href={application.cv}
+                        href={application.resume}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800 hover:underline"

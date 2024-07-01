@@ -54,12 +54,12 @@ const ApplyForm = () => {
 
     const formData = new FormData();
     if (job) {
-      formData.append("offerId", job?._id);
-      formData.append("applicantId", user?._id);
-      formData.append("cv", file);
-      formData.append("applicantName", user?.name);
-      formData.append("applicantEmail", user?.email);
-      formData.append("offerTitle", job?.title);
+      formData.append("offerId", job?._id as string);
+      formData.append("applicantId", user?._id as string);
+      formData.append("resume", file);
+      formData.append("applicantName", user?.name as string);
+      formData.append("applicantEmail", user?.email as string);
+      formData.append("offerTitle", job.title);
     }
 
     try {
@@ -73,9 +73,10 @@ const ApplyForm = () => {
       );
       setDiable(false);
       console.log("File uploaded successfully:");
-      console.log(formData.get("name"));
-      console.log(formData.get("email"));
-      console.log(formData.get("cv"));
+      console.log(formData.get("resume"));
+      console.log(formData.get("offerId"));
+      console.log(formData.get("applicantName"));
+      console.log(formData.get("offerTitle"));
       toast.success(
         "Application submitted successfully. You will receive an mail with acceptance or rejection within a week!",
         {
@@ -93,9 +94,9 @@ const ApplyForm = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="p-2 w-10/12 ">
+        <div className="p-2 w-full md:w-10/12 ">
           <div className="dark:bg-slate-900 pt-10">
-            <form className="p-6 bg-gray-200 rounded-lg shadow-md w-10/12 mx-auto dark:bg-slate-400">
+            <form className="p-6 bg-gray-200 rounded-lg shadow-md w-full md:w-10/12 mx-auto dark:bg-slate-400">
               <h2 className="text-2xl font-semibold mb-4 dark:text-white">
                 Edit the current job offer
               </h2>
@@ -333,14 +334,14 @@ const ApplyForm = () => {
               <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                 <div>
                   <label
-                    htmlFor="cv"
+                    htmlFor="resume"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                   >
-                    Upload CV
+                    Upload resume
                   </label>
                   <input
                     type="file"
-                    id="cv"
+                    id="resume"
                     onChange={handleFileChange}
                     required
                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-600"

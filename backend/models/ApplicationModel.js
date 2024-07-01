@@ -24,18 +24,12 @@ const ApplicationModel = new mongoose.Schema(
       required: true,
       default: "submited",
     },
-    cv: {
+    resume: {
       type: String,
       required: true,
     },
     offerTitle: {
       type: String,
-      required: true,
-    },
-
-    CreateAt: {
-      type: Date,
-      default: Date.now(),
       required: true,
     },
   },
