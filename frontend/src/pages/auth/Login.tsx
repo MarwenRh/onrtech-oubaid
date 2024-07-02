@@ -50,7 +50,7 @@ const Login = () => {
         </div>
         <div className="inline text-center">
           <Link to="/" className="inline hover:underline text-blue-500">
-            Home
+            return to Home
           </Link>
         </div>
       </Card>
