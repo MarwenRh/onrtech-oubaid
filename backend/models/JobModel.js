@@ -90,13 +90,5 @@ const JobSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-// Middleware to set publishedAt when published is set to true
-// JobSchema.pre("save", function (next) {
-//   if (this.isModified("published") && this.published) {
-//     this.publishedAt = new Date();
-//   } else {
-//     this.publishedAt = new Date("2002-06-04");
-//   }
-//   next();
-// });
+
 export const Job = mongoose.model("Job", JobSchema);

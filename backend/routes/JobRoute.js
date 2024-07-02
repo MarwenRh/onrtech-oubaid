@@ -9,6 +9,7 @@ import {
   getUnpublishedJobs,
   approveJobById,
   getEditorJobs,
+  hideJobById,
 } from "../controllers/jobController.js";
 import {
   adminOnly,
@@ -34,6 +35,8 @@ router.put("/updateJob/:id", protect, EditorAndAdmin, updateJobById);
 router.delete("/:id", protect, EditorAndAdmin, deleteJobById);
 // approve a Job
 router.patch("/approveJob/:id", protect, adminOnly, approveJobById);
+// Route for hedding a job by its id
+router.patch("/hideJob/:id", protect, adminOnly, hideJobById);
 // Route for getting an article by its id
 router.get("/editor/:editorId", protect, EditorAndAdmin, getEditorJobs);
 export default router;

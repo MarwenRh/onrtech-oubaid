@@ -46,7 +46,7 @@ const ArticleHome = () => {
   const pageCount = Math.ceil(articles.length / itemsPerPage);
   // end pagination
   // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
+  const handlePageClick = (event: { selected: number }) => {
     const newOffset = (event.selected * itemsPerPage) % articles.length;
     setItemOffset(newOffset);
   };

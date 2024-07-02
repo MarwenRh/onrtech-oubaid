@@ -1,17 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
-import { BiEdit, BiTrash, BiInfoCircle, BiCheckCircle } from "react-icons/bi";
+import {
+  BiEdit,
+  BiTrash,
+  BiInfoCircle,
+  BiCheckCircle,
+  BiHide,
+} from "react-icons/bi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-
-const JobSingleCard = ({ job }) => {
+import { JobOffer } from "../../../types/types";
+type Prop = {
+  job: JobOffer;
+};
+const JobSingleCard = ({ job }: Prop) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   // approve job
-  const approveJob = async (id) => {
+  const approveJob = async (id: string) => {
     try {
       await axios.patch(`http://localhost:5000/api/jobs/approveJob/${id}`);
       toast.success("Job approved successfully");
@@ -45,6 +54,14 @@ const JobSingleCard = ({ job }) => {
       ],
     });
   };
+  const hideJob = (id: string) => {
+    try {
+      axios.patch(`http://localhost:5000/api/jobs/hideJob/${id}`);
+      toast.success("we have pulled from the published and hidden");
+    } catch (error) {
+      console.log("we had a problem please try again later");
+    }
+  };
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow  m-4 flex flex-row max-w-96 mx-2 dark:bg-gray-700 ">
@@ -56,6 +73,15 @@ const JobSingleCard = ({ job }) => {
           className="text-red-500 cursor-pointer size-7"
           onClick={() => confirmDelete(job._id)}
         ></BiTrash>
+        {job.published && (
+          <BiHide
+            className="text-gray-700 cursor-pointer size-7 dark:text-gray-200"
+            onClick={() => {
+              hideJob(job._id);
+            }}
+          />
+        )}
+
         <div>
           {user?.role === "Web Editor" && (
             <div>

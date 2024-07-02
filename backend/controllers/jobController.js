@@ -50,7 +50,24 @@ export const approveJobById = async (req, res) => {
     res.status(500).send("Internal server error");
   }
 };
-
+// hide a job by id
+export const hideJobById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const job = Job.findById(id);
+    if (!job) {
+      res.status(404).send("Job not found");
+    }
+    req.body.published = false;
+    req.body.publishedAt = undefined;
+    await Job.findByIdAndUpdate(id, req.body);
+    console.log("job have been hidden");
+    res.status(200).send("job hidden successfully");
+  } catch (error) {
+    console.error("Error approving job:", error);
+    res.status(500).send("Internal server error");
+  }
+};
 // get a job by it's id
 export const findJobById = async (req, res) => {
   try {
@@ -88,6 +105,7 @@ export const updateJobById = async (req, res) => {
         req.body.published = false;
         req.body.publishedAt = undefined;
       }
+      req.body.publishedAt = Date.now();
       const id = req.params.id;
       const result = await Job.findByIdAndUpdate(id, req.body, { new: true });
       if (!result) {
@@ -119,7 +137,6 @@ export const deleteJobById = async (req, res) => {
     return res.status(500).send({ msg: error.message });
   }
 };
-
 // get jobs for his editor by his id
 export const getEditorJobs = async (req, res) => {
   try {

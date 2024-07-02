@@ -192,6 +192,7 @@ export const updateArticleById = async (req, res) => {
       req.body.published = false;
       req.body.publishedAt = undefined;
     }
+    req.body.publishedAt = Date.now();
     // Update the article in the database
     const updatedArticle = await Article.findByIdAndUpdate(id, req.body, {
       new: true,

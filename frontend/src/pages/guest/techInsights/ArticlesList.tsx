@@ -79,7 +79,7 @@ const ArticlesList = () => {
           <Loader />
         ) : (
           <div className="">
-            <div className="h-full w-full mx-auto flex flex-wrap flex-row justify-evenly items-center mt-10 bg-green-300">
+            <div className="h-full w-full mx-auto flex flex-wrap flex-row justify-evenly items-center mt-10">
               {currentItems.map((item, index) => (
                 <SingleArticleCard
                   key={index}

@@ -4,7 +4,7 @@ import Footer from "./components/reusableComponents/Footer";
 
 const Index = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen dark:bg-slate-900">
       <Navbar />
       <Outlet />
       <Footer />

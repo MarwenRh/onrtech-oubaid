@@ -1,6 +1,9 @@
+import { JobOffer } from "../../../types/types";
 import JobSingleCard from "./JobSingleCard";
-
-const JobsCard = ({ jobs }) => {
+type Prop = {
+  jobs: JobOffer[];
+};
+const JobsCard = ({ jobs }: Prop) => {
   return (
     <div>
       <div className="flex flex-wrap  mx-auto justify-center">
