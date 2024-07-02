@@ -45,8 +45,6 @@ const Profile = () => {
       };
       setProfile(initProfile);
     }
-    console.log(user);
-    console.log(initProfile);
   }, [user]);
 
   const handleInputChange = (
@@ -80,7 +78,7 @@ const Profile = () => {
       ) : (
         <section className="bg-gray-50 py-10 dark:bg-slate-900">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-800 mb-20 dark:text-gray-100">
+            <h2 className="text-3xl font-bold text-gray-800  dark:text-gray-100 text-center">
               Welcome {profile?.name}
             </h2>
             <div className="flex justify-center items-center">
@@ -130,6 +128,7 @@ const Profile = () => {
                       className="block w-full text-sm text-gray-900 bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="jobTitle"
                       type="text"
+                      disabled
                       value={profile?.jobTitle}
                       onChange={handleInputChange}
                     />

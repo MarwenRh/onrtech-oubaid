@@ -18,8 +18,8 @@ const sendEmail = async (
 
     secure: true,
     auth: {
-      user: "baldioubayed@gmail.com",
-      pass: "itfo jutk hhij plfp",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 

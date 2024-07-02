@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-// import http from "http";
-import express, { application } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -24,7 +23,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
   })
 );

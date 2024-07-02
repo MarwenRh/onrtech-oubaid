@@ -10,7 +10,6 @@ const ThemeSwitcher = ({ style }: Props) => {
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
   );
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  console.log("darkQuery : ", darkQuery);
   const onWindowMatch = () => {
     if (
       localStorage.theme === "dark" ||
