@@ -5,13 +5,23 @@ import { deleteUser } from "../../../redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { useEffect, useState } from "react";
 
 type Props = {
   user: User;
 };
 
 export const UserCard = ({ user }: Props) => {
+  const [disabelChange, setDisabelChange] = useState(false);
   const { _id, name, email, role, photo } = user;
+
+  useEffect(() => {
+    if (role === "Admin") {
+      setDisabelChange(true);
+    } else {
+      setDisabelChange(false);
+    }
+  }, [role]);
   const dispatch = useDispatch();
   const removeUser = async (id: string) => {
     await dispatch(deleteUser(id));
@@ -55,7 +65,7 @@ export const UserCard = ({ user }: Props) => {
         </p>
       </div>
       <div className="px-6 pt-4 pb-2 flex justify-between items-center">
-        <ChangeRole _id={_id} email={email} />
+        <ChangeRole _id={_id} email={email} disableChange={disabelChange} />
         <FaTrashCan
           size={27}
           className="text-red-500 hover:text-red-700 cursor-pointer dark:text-red-800 dark:hover:text-red-950"

@@ -8,9 +8,10 @@ import { getUsers, upgradeUser } from "../../../redux/features/auth/authSlice";
 type Props = {
   _id: string;
   email: string;
+  disableChange: boolean;
 };
 
-const ChangeRole = ({ _id }: Props) => {
+const ChangeRole = ({ _id, disableChange }: Props) => {
   const [userRole, setUserRole] = useState("");
   const dispatch = useDispatch();
   // Change User role
@@ -39,6 +40,7 @@ const ChangeRole = ({ _id }: Props) => {
           onChange={(e) => {
             setUserRole(e.target.value);
           }}
+          disabled={disableChange}
         >
           <option value="">-- Set role --</option>
           <option value="User">User</option>
