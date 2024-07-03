@@ -29,7 +29,10 @@ export function ContactPage() {
   const onSubmit = async (contact: Contact) => {
     console.log("Submitted details:", contact);
     try {
-      await axios.post("http://localhost:5000/api/forms", contact);
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_BASE_URL}/forms`,
+        contact
+      );
       toast.success("Your feedback have been submitted with success");
     } catch (error) {
       toast.error("we had a problem please try again");

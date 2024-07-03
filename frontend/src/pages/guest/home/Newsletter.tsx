@@ -13,7 +13,7 @@ const Newsletter = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/subscriptions",
+        `${import.meta.env.VITE_APP_API_BASE_URL}/subscriptions`,
         { email }
       );
       toast.success(response.data.message);

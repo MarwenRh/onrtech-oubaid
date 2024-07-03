@@ -12,7 +12,7 @@ const WelcomeSection = () => {
     const getNewestArticles = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:5000/api/articles/newestArticles"
+          `${import.meta.env.VITE_APP_API_BASE_URL}/articles/newestArticles`
         );
         setArticles(resp.data.topThreeArticles);
       } catch (error) {
