@@ -22,7 +22,7 @@ const Jobs = () => {
     const getJobs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/jobs/getPublishedJobs"
+          `${import.meta.env.VITE_APP_API_BASE_URL}/jobs/getPublishedJobs`
         );
         setJobs(response.data.publishedJobs);
         setLoading(false);
@@ -32,7 +32,6 @@ const Jobs = () => {
       }
     };
     getJobs();
-    // console.log(jobs[1].locationPlace);
   }, []);
 
   const filteredJobs = jobs.filter(

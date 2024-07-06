@@ -22,7 +22,7 @@ const ApplyForm = () => {
     const getSingleJob = async (id: string) => {
       try {
         const resp = await axios.get(
-          `http://localhost:5000/api/jobs/getJob/${id}`
+          `${import.meta.env.VITE_APP_API_BASE_URL}/jobs/getJob/${id}`
         );
         setJob(resp.data);
         setLoading(false);
@@ -65,7 +65,7 @@ const ApplyForm = () => {
     try {
       setDiable(true);
       await axios.post(
-        "http://localhost:5000/api/applications/apply",
+        `${import.meta.env.VITE_APP_API_BASE_URL}/applications/apply`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

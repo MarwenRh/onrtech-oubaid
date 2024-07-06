@@ -22,7 +22,9 @@ const ActiveSlider = ({ autoplayState }: Props) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getClients = async () => {
-      const resp = await axios("http://localhost:5000/api/clients");
+      const resp = await axios(
+        `${import.meta.env.VITE_APP_API_BASE_URL}/clients`
+      );
       setLoading(false);
       setClients(resp.data.Clients);
     };

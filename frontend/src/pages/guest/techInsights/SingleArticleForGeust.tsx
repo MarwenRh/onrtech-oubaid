@@ -13,7 +13,9 @@ const SingleArticleForGeust = () => {
   useEffect(() => {
     const getArticle = async () => {
       console.log(id);
-      const resp = await axios.get(`http://localhost:5000/api/articles/${id}`);
+      const resp = await axios.get(
+        `${import.meta.env.VITE_APP_API_BASE_URL}/articles/${id}`
+      );
       setLoading(false);
 
       console.log(resp.data);

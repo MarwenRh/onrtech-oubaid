@@ -19,7 +19,7 @@ const ArticlesList = () => {
     const getPublishedArticles = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:5000/api/articles/published"
+          `${import.meta.env.VITE_APP_API_BASE_URL}/articles/published`
         );
         setArticles(resp.data.PublishedArticles);
         setLoading(false);
