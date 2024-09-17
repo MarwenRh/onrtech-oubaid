@@ -8,12 +8,12 @@ import { toast } from "react-toastify";
 type Props = {
   form: Form;
 };
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const SingleForm = ({ form }: Props) => {
   // Delete an article
   const removeSub = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/forms/${id}`);
+      await axios.delete(`${BACKEND_URL}/forms/${id}`);
       toast.success("Deleted successfully");
     } catch (error) {
       toast.error("Error deleting article");

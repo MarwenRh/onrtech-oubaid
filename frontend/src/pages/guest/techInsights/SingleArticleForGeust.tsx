@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../../../components/loader/Loader";
 import { article } from "../../../types/types";
 import { formatDate } from "../../../utils/fomatDate";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const SingleArticleForGeust = () => {
   const { id } = useParams();
@@ -13,9 +14,7 @@ const SingleArticleForGeust = () => {
   useEffect(() => {
     const getArticle = async () => {
       console.log(id);
-      const resp = await axios.get(
-        `${import.meta.env.VITE_APP_API_BASE_URL}/articles/${id}`
-      );
+      const resp = await axios.get(`${BACKEND_URL}/articles/${id}`);
       setLoading(false);
 
       console.log(resp.data);

@@ -6,6 +6,7 @@ import { Loader } from "../../../components/loader/Loader";
 import SingleForm from "./SingleForm";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const FormList = () => {
   useRedirectLoggedOutUser("/login");
@@ -18,7 +19,7 @@ const FormList = () => {
   useEffect(() => {
     const getForms = async () => {
       try {
-        const resp = await axios.get("http://localhost:5000/api/forms");
+        const resp = await axios.get(`${BACKEND_URL}/forms`);
         setForms(resp.data.forms);
         setCount(resp.data.count);
         setLoading(false);

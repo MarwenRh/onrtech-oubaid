@@ -10,11 +10,11 @@ const Subscribers = () => {
   const [loading, setLoading] = useState(true);
   const [subscribers, setSubscribers] = useState([]);
   const [count, setCount] = useState(0);
-
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
   useEffect(() => {
     const getSub = async () => {
       try {
-        const resp = await axios.get("http://localhost:5000/api/subscriptions");
+        const resp = await axios.get(`${BACKEND_URL}/subscriptions`);
         setCount(resp.data.count);
         setSubscribers(resp.data.subscriptions);
         setLoading(false);

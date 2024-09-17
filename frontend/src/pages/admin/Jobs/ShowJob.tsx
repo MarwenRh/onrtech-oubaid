@@ -11,15 +11,13 @@ const ShowJob = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyAdminEditor("/profile");
   const [loading, setLoading] = useState(true);
-
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
   const { id } = useParams();
   const [job, setJob] = useState<JobOffer | undefined>();
   useEffect(() => {
     const getJobById = async () => {
       try {
-        const resp = await axios.get(
-          `http://localhost:5000/api/jobs/getJob/${id}`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/jobs/getJob/${id}`);
         setJob(resp.data);
         setLoading(false);
       } catch (error) {

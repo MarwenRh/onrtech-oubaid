@@ -16,13 +16,14 @@ import { JobOffer } from "../../../types/types";
 type Prop = {
   job: JobOffer;
 };
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const JobSingleCard = ({ job }: Prop) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   // approve job
   const approveJob = async (id: string) => {
     try {
-      await axios.patch(`http://localhost:5000/api/jobs/approveJob/${id}`);
+      await axios.patch(`${BACKEND_URL}/jobs/approveJob/${id}`);
       toast.success("Job approved successfully");
       navigate("/ManageJobs");
     } catch (error) {
@@ -32,7 +33,7 @@ const JobSingleCard = ({ job }: Prop) => {
   };
   const removeJob = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/jobs/${id}`);
+      await axios.delete(`${BACKEND_URL}/jobs/${id}`);
       toast.success("Deleted successfully");
     } catch (error) {
       toast.error("Error deleting article");
@@ -56,7 +57,7 @@ const JobSingleCard = ({ job }: Prop) => {
   };
   const hideJob = (id: string) => {
     try {
-      axios.patch(`http://localhost:5000/api/jobs/hideJob/${id}`);
+      axios.patch(`${BACKEND_URL}/jobs/hideJob/${id}`);
       toast.success("we have pulled from the published and hidden");
     } catch (error) {
       console.log("we had a problem please try again later");

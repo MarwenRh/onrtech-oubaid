@@ -9,6 +9,7 @@ import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEdito
 import { useNavigate } from "react-router-dom";
 import { CgSandClock } from "react-icons/cg";
 import { RootState } from "../../../redux/store";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const ArticleForm = () => {
   useRedirectLoggedOutUser("/login");
@@ -26,7 +27,7 @@ const ArticleForm = () => {
   const PostData = async (data: FormData) => {
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/api/articles", data);
+      await axios.post(`${BACKEND_URL}/articles`, data);
       setLoading(false);
       toast.success("Article created successfully!");
       if (user?.role === "Admin") {

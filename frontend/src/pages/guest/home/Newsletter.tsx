@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -12,10 +13,9 @@ const Newsletter = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_BASE_URL}/subscriptions`,
-        { email }
-      );
+      const response = await axios.post(`${BACKEND_URL}/subscriptions`, {
+        email,
+      });
       toast.success(response.data.message);
       setEmail("");
     } catch (error) {

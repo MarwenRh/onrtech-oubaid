@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import axios from "axios";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const UnpublishedJob = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyAdmins("/profile");
@@ -16,9 +16,7 @@ const UnpublishedJob = () => {
   const [count, setCount] = useState();
   useEffect(() => {
     const getUnpublished = async () => {
-      const resp = await axios.get(
-        "http://localhost:5000/api/jobs/getUnpublishedJobs"
-      );
+      const resp = await axios.get(`${BACKEND_URL}/jobs/getUnpublishedJobs`);
       console.log(resp.data);
       setCount(resp.data.count);
       setUnpublishedJobs(resp.data.UnpublishedJobs);

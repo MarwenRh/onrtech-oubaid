@@ -8,7 +8,7 @@ import { TiDelete } from "react-icons/ti";
 import { FaSearch } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { article } from "../../../types/types";
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const ArticlesList = () => {
   const { t } = useTranslation();
   const [articles, setArticles] = useState([]);
@@ -18,9 +18,7 @@ const ArticlesList = () => {
   useEffect(() => {
     const getPublishedArticles = async () => {
       try {
-        const resp = await axios.get(
-          `${import.meta.env.VITE_APP_API_BASE_URL}/articles/published`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/articles/published`);
         setArticles(resp.data.PublishedArticles);
         setLoading(false);
       } catch (error) {

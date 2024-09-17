@@ -10,6 +10,7 @@ import { BiEdit, BiInfoCircle, BiTrash } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { FaHandshake } from "react-icons/fa";
 import { CgSandClock } from "react-icons/cg";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const JobHome = () => {
   useRedirectLoggedOutUser("/login");
@@ -20,9 +21,7 @@ const JobHome = () => {
   useEffect(() => {
     const getUnpublishedJobs = async () => {
       try {
-        const resp = await axios.get(
-          `http://localhost:5000/api/jobs/getPublishedJobs`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/jobs/getPublishedJobs`);
         setJobs(resp.data.publishedJobs);
         setLoading(false); // Mark loading as complete
       } catch (error) {

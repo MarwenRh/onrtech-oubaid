@@ -7,6 +7,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 type Props = {
   article: article;
@@ -18,9 +19,7 @@ const ArticleSingleCard = ({ article }: Props) => {
   // approve article
   const approveArticle = async (id: string) => {
     try {
-      await axios.patch(
-        `http://localhost:5000/api/articles/approveArticle/${id}`
-      );
+      await axios.patch(`${BACKEND_URL}/articles/approveArticle/${id}`);
       toast.success("Article approved successfully");
       navigate("/ManageArticles");
     } catch (error) {
@@ -32,7 +31,7 @@ const ArticleSingleCard = ({ article }: Props) => {
   // Delete an article
   const removeArticle = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/articles/${id}`);
+      await axios.delete(`${BACKEND_URL}/articles/${id}`);
       toast.success("Deleted successfully");
     } catch (error) {
       toast.error("Error deleting article");

@@ -7,7 +7,7 @@ import ArticlesCard from "./ArticlesCard";
 import ReactPaginate from "react-paginate";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const UnpublishedArticle = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyAdmins("/profile");
@@ -16,9 +16,7 @@ const UnpublishedArticle = () => {
   const [unpublishedArticles, setUnpublishedArticles] = useState([]);
   useEffect(() => {
     const getUnpublished = async () => {
-      const resp = await axios(
-        "http://localhost:5000/api/articles/unPublished"
-      );
+      const resp = await axios(`${BACKEND_URL}/articles/unPublished`);
       console.log(resp.data);
       setCount(resp.data.count);
       setUnpublishedArticles(resp.data.UnpublishedArticles);

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEditor";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 function getEditorStyle(fieldError: FieldError | undefined) {
   return fieldError ? "border-red-500" : "";
@@ -26,9 +27,7 @@ const EditJob = () => {
     useEffect(() => {
       const getJobDetails = async () => {
         try {
-          const resp = await axios.get(
-            `http://localhost:5000/api/jobs/getJob/${id}`
-          );
+          const resp = await axios.get(`${BACKEND_URL}/jobs/getJob/${id}`);
           setCurrentJob(resp.data);
         } catch (error) {
           console.log(error);
@@ -49,7 +48,7 @@ const EditJob = () => {
       console.log("submitted data", data);
 
       try {
-        await axios.put(`http://localhost:5000/api/jobs/updateJob/${id}`, data);
+        await axios.put(`${BACKEND_URL}/jobs/updateJob/${id}`, data);
         toast.success(
           "Success! The job details have been updated successfully."
         );

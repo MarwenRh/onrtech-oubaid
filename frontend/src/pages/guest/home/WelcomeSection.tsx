@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SingleArticleCard from "../../../components/reusableComponents/SingleArticleCard";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const WelcomeSection = () => {
   const [articles, setArticles] = useState([]);
@@ -11,9 +12,7 @@ const WelcomeSection = () => {
   useEffect(() => {
     const getNewestArticles = async () => {
       try {
-        const resp = await axios.get(
-          `${import.meta.env.VITE_APP_API_BASE_URL}/articles/newestArticles`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/articles/newestArticles`);
         setArticles(resp.data.topThreeArticles);
       } catch (error) {
         console.log(error);

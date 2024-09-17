@@ -12,6 +12,7 @@ import { FaChartLine } from "react-icons/fa";
 import { CgSandClock } from "react-icons/cg";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const ArticleHome = () => {
   useRedirectLoggedOutUser("/login");
@@ -23,9 +24,7 @@ const ArticleHome = () => {
   useEffect(() => {
     const getPublishedArticles = async () => {
       try {
-        const resp = await axios.get(
-          "http://localhost:5000/api/articles/published"
-        );
+        const resp = await axios.get(`${BACKEND_URL}/articles/published`);
         setArticles(resp.data.PublishedArticles);
         setLoading(false);
         setCount(resp.data.count);

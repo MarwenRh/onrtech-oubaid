@@ -19,15 +19,13 @@ const EditArticle = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imageName, setImageName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
   const { id } = useParams();
 
   useEffect(() => {
     const getArticleDetails = async () => {
       try {
-        const resp = await axios.get(
-          `http://localhost:5000/api/articles/${id}`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/articles/${id}`);
         if (resp) {
           console.log(resp.data);
           setTitle(resp.data.title);
@@ -53,7 +51,7 @@ const EditArticle = () => {
       formData.append("image", image);
     }
     try {
-      await axios.put(`http://localhost:5000/api/articles/${id}`, formData);
+      await axios.put(`${BACKEND_URL}/articles/${id}`, formData);
 
       toast.success("Article updated successfully!");
       if (user?.role === "Admin") {

@@ -10,6 +10,7 @@ import { BiCheckCircle } from "react-icons/bi";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
 import { MdCancel } from "react-icons/md";
 import ReactPaginate from "react-paginate";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const Applications = () => {
   useRedirectLoggedOutUser("/login");
@@ -20,9 +21,7 @@ const Applications = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/applications"
-        );
+        const response = await axios.get(`${BACKEND_URL}/applications`);
         setApplications(response.data);
         setLoading(false);
       } catch (error) {
@@ -36,7 +35,7 @@ const Applications = () => {
   // accepting
   const acceptApp = async (id: string) => {
     try {
-      await axios.patch(`http://localhost:5000/api/applications/accept/${id}`);
+      await axios.patch(`${BACKEND_URL}/applications/accept/${id}`);
       toast.success("You have accepted this application");
     } catch (error) {
       toast.error("Error accepting application");
@@ -45,7 +44,7 @@ const Applications = () => {
   // rejecting
   const rejectApp = async (id: string) => {
     try {
-      await axios.patch(`http://localhost:5000/api/applications/reject/${id}`);
+      await axios.patch(`${BACKEND_URL}/applications/reject/${id}`);
       toast.success("You have rejected this application");
     } catch (error) {
       toast.error("Error rejecting application");
@@ -54,7 +53,7 @@ const Applications = () => {
   // deleting
   const removeApp = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/applications/${id}`);
+      await axios.delete(`${BACKEND_URL}/applications/applications/${id}`);
       toast.success("Deleted successfully");
     } catch (error) {
       toast.error("Error deleting application");

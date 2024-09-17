@@ -16,6 +16,7 @@ import useRedirectOnlyEditors from "../../hooks/useRedirectOnlyEditors";
 import useRedirectLoggedOutUser from "../../hooks/userRedirectLoggedOutUser";
 import { RootState } from "../../redux/store";
 
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const EditorArticles = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyEditors("/profile");
@@ -32,7 +33,7 @@ const EditorArticles = () => {
         console.log(editorId);
         try {
           const resp = await axios.get(
-            `http://localhost:5000/api/articles/editor/${editorId}`
+            `${BACKEND_URL}/articles/editor/${editorId}`
           );
           setEditorArticles(resp.data.editorArticles);
           setLoading(false);

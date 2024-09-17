@@ -10,6 +10,7 @@ const CreateClient = () => {
   const [image, setImage] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
   const maxDescriptionLength = 100;
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,7 +55,7 @@ const CreateClient = () => {
     formData.append("description", description);
 
     try {
-      await axios.post("http://localhost:5000/api/clients", formData);
+      await axios.post(`${BACKEND_URL}/clients`, formData);
       toast.success("Client added successfully!");
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {

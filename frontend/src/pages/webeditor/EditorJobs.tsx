@@ -23,13 +23,14 @@ const EditorJobs = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useSelector((state: RootState) => state.auth);
   const editorId = user?._id;
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
   useEffect(() => {
     const getEditorJobs = async () => {
       if (editorId) {
         try {
           const resp = await axios.get(
-            `http://localhost:5000/api/jobs/editor/${editorId}`
+            `${BACKEND_URL}}/jobs/editor/${editorId}`
           );
           setEditorJobs(resp.data.editorJobs);
           setCount(resp.data.count);

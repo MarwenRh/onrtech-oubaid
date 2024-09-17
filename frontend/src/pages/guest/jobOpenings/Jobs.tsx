@@ -9,6 +9,7 @@ import { MdPlace } from "react-icons/md";
 import { offers } from "../../../types/types";
 import ReactPaginate from "react-paginate";
 import { useTranslation } from "react-i18next";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 const Jobs = () => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const Jobs = () => {
     const getJobs = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_BASE_URL}/jobs/getPublishedJobs`
+          `${BACKEND_URL}/jobs/getPublishedJobs`
         );
         setJobs(response.data.publishedJobs);
         setLoading(false);

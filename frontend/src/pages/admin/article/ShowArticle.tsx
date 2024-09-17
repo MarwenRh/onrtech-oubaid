@@ -7,7 +7,7 @@ import { formatDate } from "../../../utils/fomatDate";
 import { Loader } from "../../../components/loader/Loader";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
 import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEditor";
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const ShowArticle = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyAdminEditor("/profile");
@@ -19,9 +19,7 @@ const ShowArticle = () => {
     console.log(typeof id);
     const getArticle = async () => {
       try {
-        const resp = await axios.get(
-          `http://localhost:5000/api/articles/${id}`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/articles/${id}`);
         setArticle(resp.data);
         setLoading(false);
       } catch (error) {

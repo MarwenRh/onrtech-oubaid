@@ -38,6 +38,9 @@ const ActiveSlider = ({ autoplayState }: Props) => {
         <div className="flex items-center justify-center flex-col text-center">
           <Swiper
             breakpoints={{
+              default: {
+                slidesPerView: 2,
+              },
               // when window width is >= 640px
               640: {
                 slidesPerView: 2,

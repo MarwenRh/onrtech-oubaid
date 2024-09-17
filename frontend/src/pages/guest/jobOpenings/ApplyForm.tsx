@@ -15,15 +15,14 @@ const ApplyForm = () => {
   const [job, setJob] = useState<JobOffer | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [disable, setDiable] = useState(false);
+  const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
   const { id } = useParams();
 
   useEffect(() => {
     const getSingleJob = async (id: string) => {
       try {
-        const resp = await axios.get(
-          `${import.meta.env.VITE_APP_API_BASE_URL}/jobs/getJob/${id}`
-        );
+        const resp = await axios.get(`${BACKEND_URL}/jobs/getJob/${id}`);
         setJob(resp.data);
         setLoading(false);
       } catch (error) {
@@ -64,13 +63,9 @@ const ApplyForm = () => {
 
     try {
       setDiable(true);
-      await axios.post(
-        `${import.meta.env.VITE_APP_API_BASE_URL}/applications/apply`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post(`${BACKEND_URL}/applications/apply`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setDiable(false);
       console.log("File uploaded successfully:");
       console.log(formData.get("resume"));

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { updatedProfile } from "../../../types/types";
 
-const BACKEND_URL = "http://localhost:5000";
-export const API_URL = `${BACKEND_URL}/api/users`;
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
+export const API_URL = `${BACKEND_URL}/users`;
 
 // Logout User
 const logout = async () => {

@@ -10,11 +10,11 @@ import { toast } from "react-toastify";
 import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEditor";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../redux/store";
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 function getEditorStyle(fieldError: FieldError | undefined) {
   return fieldError ? "border-red-500" : "";
 }
-
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const CreateJob = () => {
   useRedirectLoggedOutUser("/login");
   useRedirectOnlyAdminEditor("/profile");
@@ -29,7 +29,7 @@ const CreateJob = () => {
   } = useForm<JobOffer>({ mode: "onBlur", reValidateMode: "onBlur" });
   const PostData = async (jobOffer: JobOffer) => {
     try {
-      await axios.post("http://localhost:5000/api/jobs/PostJob", jobOffer);
+      await axios.post(`${BACKEND_URL}/jobs/PostJob`, jobOffer);
       toast.success("New job offer created successfully !");
     } catch (error) {
       console.log(error);

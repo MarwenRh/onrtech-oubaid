@@ -4,6 +4,7 @@ import ValidationError from "../../../components/reusableComponents/ValidationEr
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
 type Contact = {
   name: string;
@@ -29,10 +30,7 @@ export function ContactPage() {
   const onSubmit = async (contact: Contact) => {
     console.log("Submitted details:", contact);
     try {
-      await axios.post(
-        `${import.meta.env.VITE_APP_API_BASE_URL}/forms`,
-        contact
-      );
+      await axios.post(`${BACKEND_URL}/forms`, contact);
       toast.success("Your feedback have been submitted with success");
     } catch (error) {
       toast.error("we had a problem please try again");
