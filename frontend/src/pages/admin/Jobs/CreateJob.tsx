@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEditor";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../redux/store";
-const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
+
 function getEditorStyle(fieldError: FieldError | undefined) {
   return fieldError ? "border-red-500" : "";
 }
