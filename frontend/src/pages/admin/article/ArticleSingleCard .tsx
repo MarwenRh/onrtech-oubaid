@@ -101,10 +101,16 @@ const ArticleSingleCard = ({ article }: Props) => {
           <h2 className="text-xl font-bold text-gray-800 dark:text-white">
             {article.title}
           </h2>
-          <p className="text-sm text-gray-600 mt-1 dark:text-white">
-            {article.content.slice(0, 150)}
-            {article.content.length > 150 ? "..." : ""}
-          </p>
+          {(() => {
+            const plain = (article.contentHtml || "").replace(/<[^>]+>/g, " ").trim();
+            const preview = plain.slice(0, 150);
+            return (
+              <p className="text-sm text-gray-600 mt-1 dark:text-white">
+                {preview}
+                {plain.length > 150 ? "..." : ""}
+              </p>
+            );
+          })()}
         </div>
         <div className="flex justify-between items-center mt-4">
           <div className="flex flex-col items-center justify-evenly my-8"></div>

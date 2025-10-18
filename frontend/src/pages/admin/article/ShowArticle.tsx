@@ -7,6 +7,7 @@ import { formatDate } from "../../../utils/fomatDate";
 import { Loader } from "../../../components/loader/Loader";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
 import useRedirectOnlyAdminEditor from "../../../hooks/useRedirectOnlyAdminEditor";
+import { Helmet } from "react-helmet-async";
 const BACKEND_URL = import.meta.env.VITE_APP_API_BASE_URL;
 const ShowArticle = () => {
   useRedirectLoggedOutUser("/login");
@@ -30,6 +31,11 @@ const ShowArticle = () => {
   }, [id]);
   return (
     <div className="dark:bg-slate-900">
+      <Helmet>
+        <title>{article?.seoTitle || article?.title || "Article - Admin View"}</title>
+        <meta name="description" content={article?.seoDescription || article?.summary || "Article preview"} />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       {loading ? (
         <Loader />
       ) : (
@@ -61,9 +67,18 @@ const ShowArticle = () => {
               alt="Article"
               className="w-full rounded-md mt-4"
             />
-            <p className="text-base text-gray-700 mt-4 dark:text-gray-100">
-              {article?.content}
-            </p>
+            <section className="prose lg:prose-lg dark:prose-invert max-w-none mt-4">
+              <div
+                className="text-gray-800 dark:text-gray-100"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    (article?.contentHtml || "")
+                      .replace(/&amp;/g, "&")
+                      .replace(/&lt;/g, "<")
+                      .replace(/&gt;/g, ">"),
+                }}
+              />
+            </section>
           </div>
         </div>
       )}

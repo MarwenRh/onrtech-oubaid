@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/fomatDate";
-import { cutContent, cutTitle } from "../../utils/cutText";
+import { cutTitle } from "../../utils/cutText";
 import { article } from "../../types/types";
 type Prop = {
   article: article;
@@ -29,9 +29,17 @@ const SingleArticleCard = ({ article, style }: Prop) => {
           </span>
         </div>
 
-        <p className="text-gray-700 dark:text-white">
-          {cutContent(article.content)}
-        </p>
+        <div className="prose dark:prose-invert max-w-none text-gray-700 dark:text-white relative overflow-hidden" style={{ maxHeight: "7.5rem" }}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: (article.contentHtml || (article as any).content || "")
+                .replace(/&amp;/g, "&")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">"),
+            }}
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white dark:from-slate-700 to-transparent" />
+        </div>
 
         {/* {article.content.length > maxContentLength && ( */}
         <div className="mt-4">

@@ -55,12 +55,23 @@ export type review = {
 };
 export type article = {
   _id: string;
+  userId: string;
   title: string;
-  content: string;
+  slug?: string;
+  summary?: string;
+  contentHtml: string;
   image: string;
   author: string;
+  tags?: string[];
+  category?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   published: boolean;
-  publishedAt: Date;
+  publishedAt?: string;
+  status?: "draft" | "review" | "published";
+  readTimeMinutes?: number;
+  createdAt?: string;
+  updatedAt?: string;
 };
 export type articlesList = {
   articles: article[];

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginStatus, getUser } from "./redux/features/auth/authSlice";
 import { AppDispatch, RootState } from "./redux/store";
+import { HelmetProvider } from "react-helmet-async";
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -20,11 +21,10 @@ const App = () => {
     }
   }, [dispatch, isLoggedIn, user]);
   return (
-    <>
+    <HelmetProvider>
       <ToastContainer />
-
       <Routes />
-    </>
+    </HelmetProvider>
   );
 };
 export default App;

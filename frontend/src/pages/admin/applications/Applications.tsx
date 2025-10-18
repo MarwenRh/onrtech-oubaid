@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Loader } from "../../../components/loader/Loader";
 import { Application } from "../../../types/types";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
-import { FaTrashCan } from "react-icons/fa6";
+import { FaTrashCan, FaDownload, FaUser, FaEnvelope, FaBriefcase, FaFileAlt } from "react-icons/fa6";
 import { confirmAlert } from "react-confirm-alert";
 import { BiCheckCircle } from "react-icons/bi";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
@@ -91,136 +91,184 @@ const Applications = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 dark:bg-slate-900">
+    <div className="min-h-screen dark:bg-slate-900 bg-gray-50">
       {loading ? (
-        <Loader />
+        <div className="flex justify-center items-center py-16">
+          <Loader />
+        </div>
       ) : (
-        <div className="m-4">
-          <h1 className="text-2xl font-bold mb-4 dark:text-white">
-            Job Applications : you have {currentItems.length} application to
-            check
-          </h1>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white">
-              <thead className="bg-gray-100">
-                <tr className="dark:bg-slate-500 ">
-                  <th className="px-6 py-3 border-b border-gray-200 dark:border-slate-600 text-gray-800 dark:text-gray-200 text-left text-sm uppercase font-medium">
-                    Applicant Name
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 dark:border-slate-600 text-gray-800 dark:text-gray-200 text-left text-sm uppercase font-medium">
-                    Applicant Email
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 dark:border-slate-600 text-gray-800 dark:text-gray-200 text-left text-sm uppercase font-medium">
-                    Job Title
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 dark:border-slate-600 text-gray-800 dark:text-gray-200 text-left text-sm uppercase font-medium">
-                    Resume
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 dark:border-slate-600 text-gray-800 dark:text-gray-200 text-left text-sm uppercase font-medium">
-                    <div className=" flex flex-col">
-                      <p> Action</p>
-                      <p>Accept / Reject /delete </p>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {applications.map((application, index) => (
-                  <tr
-                    key={index}
-                    className={`${
-                      application.state === "accepted"
-                        ? "bg-gray-200 dark:bg-slate-500"
-                        : application.state === "rejected"
-                        ? "bg-gray-400 dark:bg-slate-800"
-                        : "hover:bg-gray-50 dark:bg-slate-600"
-                    }`}
-                  >
-                    <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-100">
-                      {application.applicantName}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-300">
-                      {application.applicantEmail}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-300">
-                      {application.offerTitle}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-300">
-                      <a
-                        href={application.resume}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 hover:underline"
-                      >
-                        Download CV
-                      </a>
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-200 dark:border-slate-600 text-base dark:text-gray-300">
-                      <div className="flex flex-row-reverse justify-center items-center">
-                        <span className="flex justify-center">
-                          <FaTrashCan
-                            size={25}
-                            className="text-red-700 hover:text-red-800 cursor-pointer m-1"
-                            onClick={() => confirmDelete(application._id)}
-                          />
-                        </span>
-
-                        {application.state === "rejected" ? (
-                          <p className="text-orange-600 text-lg m-1 mr-3">
-                            Rejected
-                          </p>
-                        ) : (
-                          application.state !== "accepted" && (
-                            <span className="flex justify-center">
-                              <MdCancel
-                                size={30}
-                                className="text-orange-600 hover:text-orange-800 cursor-pointer m-1"
-                                onClick={() => rejectApp(application._id)}
-                                data-tip="Reject Application"
-                              />
-                            </span>
-                          )
-                        )}
-                        {application.state === "accepted" ? (
-                          <p className="text-green-500 text-lg font-bold m-1 mr-3">
-                            Accepted
-                          </p>
-                        ) : (
-                          application.state !== "rejected" && (
-                            <span className="flex justify-center">
-                              <BiCheckCircle
-                                size={30}
-                                className="text-green-500 hover:text-green-700 cursor-pointer m-1"
-                                onClick={() => acceptApp(application._id)}
-                              />
-                            </span>
-                          )
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Header Section */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  Job Applications
+                </h1>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">
+                  Review and manage job applications from candidates
+                </p>
+              </div>
+              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
+                <div className="flex items-center">
+                  <FaBriefcase className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                      Total Applications
+                    </p>
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                      {applications.length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          {/* Applications Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {currentItems.map((application, index) => (
+              <div
+                key={index}
+                className={`bg-white dark:bg-slate-800 rounded-xl shadow-sm border transition-all duration-300 hover:shadow-md ${
+                  application.state === "accepted"
+                    ? "border-green-200 dark:border-green-800"
+                    : application.state === "rejected"
+                    ? "border-red-200 dark:border-red-800"
+                    : "border-gray-200 dark:border-gray-700"
+                }`}
+              >
+                <div className="p-6">
+                  {/* Header with Status */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                        <FaUser className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                          {application.applicantName}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {application.applicantEmail}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      {application.state === "accepted" ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                          Accepted
+                        </span>
+                      ) : application.state === "rejected" ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+                          Rejected
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                          Pending
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Job Title */}
+                  <div className="mb-4">
+                    <div className="flex items-center mb-2">
+                      <FaBriefcase className="h-4 w-4 text-gray-400 mr-2" />
+                      <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        Applied for
+                      </span>
+                    </div>
+                    <p className="text-gray-900 dark:text-white font-medium">
+                      {application.offerTitle}
+                    </p>
+                  </div>
+
+                  {/* Resume Download */}
+                  <div className="mb-6">
+                    <a
+                      href={application.resume}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
+                    >
+                      <FaDownload className="h-4 w-4 mr-2" />
+                      Download Resume
+                    </a>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex space-x-2">
+                      {application.state !== "accepted" && (
+                        <button
+                          onClick={() => acceptApp(application._id)}
+                          className="inline-flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                          title="Accept Application"
+                        >
+                          <BiCheckCircle className="h-4 w-4" />
+                        </button>
+                      )}
+                      {application.state !== "rejected" && (
+                        <button
+                          onClick={() => rejectApp(application._id)}
+                          className="inline-flex items-center px-3 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                          title="Reject Application"
+                        >
+                          <MdCancel className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => confirmDelete(application._id)}
+                      className="inline-flex items-center px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                      title="Delete Application"
+                    >
+                      <FaTrashCan className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Empty State */}
+          {currentItems.length === 0 && (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaBriefcase className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                No applications found
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Job applications will appear here when candidates apply for your positions.
+              </p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {pageCount > 1 && (
+            <div className="mt-12">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+                containerClassName="flex items-center justify-center gap-2"
+                pageLinkClassName="px-3 py-2 text-sm leading-tight text-blue-700 bg-white rounded-md border border-blue-200 hover:bg-blue-50 dark:bg-slate-800 dark:text-blue-300 dark:border-white/10"
+                previousLinkClassName="px-3 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                nextLinkClassName="px-3 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                breakLinkClassName="px-3 py-2 text-sm text-blue-700 bg-white rounded-md border border-blue-200 dark:bg-slate-800 dark:text-blue-300 dark:border-white/10"
+                activeLinkClassName="ring-2 ring-blue-500"
+              />
+            </div>
+          )}
         </div>
       )}
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-        // Tailwind CSS classes
-        containerClassName="flex items-center justify-center space-x-2"
-        pageLinkClassName="py-2 px-3 leading-tight text-blue-600 bg-white rounded-md border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
-        previousLinkClassName="py-2 px-3 leading-tight text-white bg-blue-500 rounded-l hover:bg-blue-700"
-        nextLinkClassName="py-2 px-3 leading-tight text-white bg-blue-500 rounded-r hover:bg-blue-700"
-        breakLinkClassName="py-2 px-3 leading-tight text-blue-600 bg-white rounded-md border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
-        activeLinkClassName="py-2 px-3 leading-tight text-blue-900 bg-white rounded-md border border-blue-300 hover:bg-blue-100 hover:text-blue-700"
-      />
     </div>
   );
 };
