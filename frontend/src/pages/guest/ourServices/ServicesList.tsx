@@ -2,7 +2,6 @@ import { LiaHandsHelpingSolid } from "react-icons/lia";
 import { FaDesktop, FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import { TbDeviceMobileCode } from "react-icons/tb";
 import { GiArtificialIntelligence } from "react-icons/gi";
-import SingleService from "./SingleService";
 import { useTranslation } from "react-i18next";
 
 const ServicesList = () => {

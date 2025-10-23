@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Loader } from "../../../components/loader/Loader";
 import { Application } from "../../../types/types";
 import useRedirectOnlyAdmins from "../../../hooks/useRedirectOnlyAdmins";
-import { FaTrashCan, FaDownload, FaUser, FaEnvelope, FaBriefcase, FaFileAlt } from "react-icons/fa6";
+import { FaTrashCan, FaDownload, FaUser, FaBriefcase } from "react-icons/fa6";
 import { confirmAlert } from "react-confirm-alert";
 import { BiCheckCircle } from "react-icons/bi";
 import useRedirectLoggedOutUser from "../../../hooks/userRedirectLoggedOutUser";
