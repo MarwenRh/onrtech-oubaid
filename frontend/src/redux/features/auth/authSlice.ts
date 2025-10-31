@@ -16,8 +16,7 @@ type AuthState = {
 const initialState: AuthState = {
   isLoggedIn: false,
   user: null,
-  users: [],
-  twoFactor: false,
+  users: [], // ✅ Always empty array
   isSuccess: false,
   isError: false,
   isLoading: false,
@@ -28,7 +27,7 @@ const initialState: AuthState = {
 export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
   try {
     return await authService.logout();
-  } catch (error) {
+  } catch (error: any) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
@@ -36,13 +35,14 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
     return thunkApi.rejectWithValue(message);
   }
 });
+
 // get Login Status
 export const getLoginStatus = createAsyncThunk(
   "auth/loginStatus",
   async (_, thunkApi) => {
     try {
       return await authService.getLoginStatus();
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -53,11 +53,12 @@ export const getLoginStatus = createAsyncThunk(
     }
   }
 );
+
 // get User
 export const getUser = createAsyncThunk("auth/getUser", async (_, thunkApi) => {
   try {
     return await authService.getUser();
-  } catch (error) {
+  } catch (error: any) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
@@ -65,13 +66,14 @@ export const getUser = createAsyncThunk("auth/getUser", async (_, thunkApi) => {
     return thunkApi.rejectWithValue(message);
   }
 });
+
 // Update user
 export const updateUser = createAsyncThunk(
   "auth/updateUser",
-  async (userData, thunkApi) => {
+  async (userData: any, thunkApi) => {
     try {
       return await authService.updateUser(userData);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -89,7 +91,7 @@ export const getUsers = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       return await authService.getUsers();
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -100,14 +102,14 @@ export const getUsers = createAsyncThunk(
     }
   }
 );
-// delete user
 
+// delete user
 export const deleteUser = createAsyncThunk(
   "auth/deleteUser",
-  async (id, thunkAPI) => {
+  async (id: string, thunkAPI) => {
     try {
       return await authService.deleteUser(id);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -118,13 +120,14 @@ export const deleteUser = createAsyncThunk(
     }
   }
 );
+
 // upgrade User
 export const upgradeUser = createAsyncThunk(
   "auth/upgradeUser",
-  async (userData, thunkAPI) => {
+  async (userData: any, thunkAPI) => {
     try {
       return await authService.upgradeUser(userData);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -139,10 +142,10 @@ export const upgradeUser = createAsyncThunk(
 //  login With google
 export const loginWithGoogle = createAsyncThunk(
   "auth/loginWithGoogle",
-  async (userToken, thunkAPI) => {
+  async (userToken: string, thunkAPI) => {
     try {
       return await authService.loginWithGoogle(userToken);
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -159,7 +162,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     RESET(state) {
-      state.twoFactor = false;
       state.isSuccess = false;
       state.isError = false;
       state.isLoading = false;
@@ -168,7 +170,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       // Logout User
       .addCase(logout.pending, (state) => {
         state.isLoading = true;
@@ -183,8 +184,7 @@ const authSlice = createSlice({
       .addCase(logout.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-
-        toast.error("we had a problem please try again");
+        toast.error("Logout failed. Please try again");
       })
 
       // get login status
@@ -200,6 +200,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
+
       // get User
       .addCase(getUser.pending, (state) => {
         state.isLoading = true;
@@ -208,14 +209,17 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = {
+          ...action.payload,
+          photo: action.payload?.photo || 'https://ui-avatars.com/api/?name=User&background=3b82f6&color=fff'
+        };
       })
       .addCase(getUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-
-        toast.error("we had a problem please try again");
+        toast.error("Failed to fetch user data");
       })
+
       // update a User
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
@@ -224,12 +228,16 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = {
+          ...action.payload,
+          photo: action.payload?.photo || state.user?.photo || 'https://ui-avatars.com/api/?name=User&background=3b82f6&color=fff'
+        };
+        toast.success("Profile updated successfully");
       })
       .addCase(updateUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-        toast.error("we had a problem please try again");
+        toast.error("Failed to update profile");
       })
 
       // get users
@@ -239,15 +247,15 @@ const authSlice = createSlice({
       .addCase(getUsers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.users = action.payload;
-
-        toast.success(action.payload);
+        state.users = action.payload || []; // ✅ Safe fallback
       })
       .addCase(getUsers.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-        toast.error("we had a problem please try again");
+        state.users = []; // ✅ Reset to empty array on error
+        toast.error("Failed to fetch users");
       })
+
       // delete user
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true;
@@ -261,9 +269,9 @@ const authSlice = createSlice({
       .addCase(deleteUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-        // state.message = action.payload;
-        toast.error("we had a problem please try again");
+        toast.error("Failed to delete user");
       })
+
       // upgrade user
       .addCase(upgradeUser.pending, (state) => {
         state.isLoading = true;
@@ -277,7 +285,7 @@ const authSlice = createSlice({
       .addCase(upgradeUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
-        toast.error("we had a problem please try again");
+        toast.error("Failed to upgrade user");
       })
 
       // login With Google
@@ -288,22 +296,21 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
-        toast.success("Login sucessful");
+        state.user = {
+          ...action.payload,
+          photo: action.payload?.photo || 'https://ui-avatars.com/api/?name=User&background=3b82f6&color=fff'
+        };
+        toast.success("Login successful");
       })
       .addCase(loginWithGoogle.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.user = null;
-        toast.error("we had a problem please try again");
+        toast.error("Google login failed");
       });
   },
 });
 
 export const { RESET } = authSlice.actions;
-
-// Selectors
-// export const selectIsLoggedIn = (state: AuthState) => state.auth.isLoggedIn;
-// export const selectUser = (state: AuthState) => state.auth.user;
 
 export default authSlice.reducer;
